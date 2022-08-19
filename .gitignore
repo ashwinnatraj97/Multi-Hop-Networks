@@ -1,2 +1,6 @@
 graphs/
 *.asv
+*.mat
+*.txt
+*.eps
+*.log
