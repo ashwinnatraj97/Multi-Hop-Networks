@@ -18,6 +18,15 @@ TX_power = -40:1:15;
 RX_SNR = zeros(length(alpha), length(N), length(TX_power));
 noise_floor = -204 + 10*log10(signal_bandwidth)+2;      % Noise Floor 174 dBm/Hz = -204 dB/Hz
 
+% Rician Channel (K is high in a LoS Channel)
+KdB = 12;                                               % K is in dB
+K = db2mag(KdB);
+rho = 0.5;                                              % 0 < rho < 1 (Spatial Correlation )
+chanInst = 100;
+for i = 1:chanInst
+    H_all(i,:,:) = mimoChan(K,M,rho);
+end
+
 % Calculate End-to-end Capacity
 per_hop_capacity = zeros(length(alpha),length(N),length(TX_power));
 transmission_rate = zeros(length(alpha),length(N),length(TX_power));
